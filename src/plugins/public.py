@@ -223,14 +223,14 @@ async def _(bot: Bot, event: Event, state: T_State):
 
 
 #按性别随机群友
-random_person = on_regex("/随个([男女]?)人")
+random_person = on_regex("^/随个([男女]?)人")
 
 @random_person.handle()
 async def _(bot: Bot, event: Event, state: T_State):
     try:
         gid = event.group_id
         glst = await bot.get_group_member_list(group_id=gid, self_id=int(bot.self_id))
-        v = re.match("随个([男女]?)人", str(event.get_message())).group(1)
+        v = re.match("/随个([男女]?)人", str(event.get_message())).group(1)
         if v == '男':
             for member in glst[:]:
                 if member['sex'] != 'male':
@@ -261,7 +261,7 @@ async def _(bot: Bot, event: Event, state: T_State):
 
 
 #"随个"的其他任意匹配【随机群友/挨骂】
-snmb = on_regex("/随个.+", priority=50)
+snmb = on_regex("^/随个.+", priority=50)
 
 @snmb.handle()
 async def _(bot: Bot, event: Event, state: T_State):

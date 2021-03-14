@@ -273,7 +273,7 @@ for t in tmp:
 
 
 #查找歌曲别名
-find_song = on_regex(r"/.+是什么歌")
+find_song = on_regex(r"^/.+是什么歌")
 
 @find_song.handle()
 async def _(bot: Bot, event: Event, state: T_State):
